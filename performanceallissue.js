@@ -87,15 +87,16 @@ app.get("/stats", (req, res) => {
 });
 
 // --------------------------------------------------
-// ❌ MEDIUM: No Compression Enabled
-app.get("/big-text", (req, res) => {
-  let text = "";
+const compression = require('compression');
+app.use(compression());
+
+app.get('/big-text', (req, res) => {
+  let text = '';
   for (let i = 0; i < 100000; i++) {
-    text += "This is a large response ";
+    text += 'This is a large response ';
   }
   res.send(text);
 });
-
 // --------------------------------------------------
 // ❌ LOW: Excessive Console Logging
 app.get("/debug", (req, res) => {
